@@ -1,0 +1,408 @@
+/* ============================================================
+   Abandoned but not Forgotten — styles
+   Dark space theme, CSS variables, mobile-first, accessible.
+   ============================================================ */
+
+:root {
+  --bg: #05070f;
+  --bg-alt: #0a0f1e;
+  --panel: #0d1428;
+  --panel-edge: #1c2a4a;
+  --text: #e8ecf8;
+  --text-dim: #a8b3d0;
+  --accent: #7dd3fc;
+  --accent-2: #c4b5fd;
+  --gold: #fbbf24;
+  --danger: #f87171;
+  --radius: 14px;
+  --maxw: 1080px;
+  --font: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+#starfield {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--accent);
+  color: #04121f;
+  padding: 0.6rem 1rem;
+  z-index: 100;
+  border-radius: 0 0 var(--radius) 0;
+  font-weight: 700;
+}
+.skip-link:focus { left: 0; }
+
+/* ---------- Hero ---------- */
+.hero {
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 1rem;
+  background:
+    radial-gradient(ellipse at 50% 120%, rgba(56, 89, 199, 0.35), transparent 60%),
+    radial-gradient(ellipse at 50% -20%, rgba(125, 211, 252, 0.12), transparent 55%);
+}
+.hero-inner { max-width: 760px; }
+.hero-kicker {
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  color: var(--accent-2);
+  margin: 0 0 1rem;
+}
+.hero h1 {
+  font-size: clamp(2.2rem, 7vw, 4.6rem);
+  line-height: 1.05;
+  margin: 0 0 1rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.accent { color: var(--accent); }
+.hero-tagline { font-size: clamp(1rem, 2.5vw, 1.3rem); color: var(--text-dim); margin: 0 0 0.4rem; }
+.hero-sub { font-style: italic; color: var(--gold); margin: 0 0 2.5rem; }
+
+.scroll-cue {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.cue-arrow { font-size: 1.4rem; animation: bob 2s ease-in-out infinite; }
+@keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+
+/* ---------- Sections ---------- */
+.section { padding: 4.5rem 1rem; }
+.section-inner { max-width: var(--maxw); margin: 0 auto; }
+.section h2 {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  margin: 0 0 0.8rem;
+  letter-spacing: -0.01em;
+}
+.section-lede { color: var(--text-dim); max-width: 62ch; margin: 0 0 2rem; }
+
+/* ---------- Map ---------- */
+.map-toggle { display: flex; gap: 0.6rem; margin-bottom: 1.2rem; }
+.map-btn, .filter-btn {
+  background: var(--panel);
+  color: var(--text-dim);
+  border: 1px solid var(--panel-edge);
+  border-radius: 999px;
+  padding: 0.45rem 1.2rem;
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.map-btn:hover, .filter-btn:hover { border-color: var(--accent); color: var(--text); }
+.map-btn.active, .filter-btn.active {
+  background: var(--accent);
+  color: #04121f;
+  border-color: var(--accent);
+  font-weight: 700;
+}
+.map-btn:focus-visible, .filter-btn:focus-visible,
+button:focus-visible, select:focus-visible, input:focus-visible, a:focus-visible {
+  outline: 3px solid var(--accent-2);
+  outline-offset: 2px;
+}
+.map-wrap {
+  background: var(--bg-alt);
+  border: 1px solid var(--panel-edge);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+#map-canvas { display: block; width: 100%; max-width: 640px; height: auto; margin: 0 auto; cursor: pointer; }
+.map-legend {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  padding: 0.8rem 0 0;
+  margin: 0;
+}
+.map-legend button {
+  background: none;
+  border: 1px solid var(--panel-edge);
+  border-radius: 999px;
+  color: var(--text-dim);
+  font: inherit;
+  font-size: 0.8rem;
+  padding: 0.25rem 0.8rem;
+  cursor: pointer;
+}
+.map-legend button:hover { border-color: var(--accent); color: var(--text); }
+.map-note { font-size: 0.85rem; color: var(--text-dim); text-align: center; margin-top: 0.8rem; }
+
+/* ---------- Artifact cards ---------- */
+.filter-bar { display: flex; gap: 0.5rem; margin-bottom: 1.6rem; flex-wrap: wrap; }
+.artifact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.4rem;
+}
+.card {
+  background: var(--panel);
+  border: 1px solid var(--panel-edge);
+  border-radius: var(--radius);
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  scroll-margin-top: 1.5rem;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.card:hover { transform: translateY(-3px); border-color: var(--accent); }
+.card.hidden { display: none; }
+.card.highlight { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold) inset; }
+.card-badges { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.badge {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid var(--panel-edge);
+  color: var(--text-dim);
+}
+.badge.moon { border-color: #a78bfa; color: #c4b5fd; }
+.badge.mars { border-color: #fb923c; color: #fdba74; }
+.badge.status { border-color: var(--gold); color: var(--gold); }
+.card h3 { margin: 0; font-size: 1.2rem; line-height: 1.3; }
+.card .mission-line { margin: 0; color: var(--text-dim); font-size: 0.9rem; }
+.card-image {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 10px;
+  background: var(--bg-alt);
+  border: 1px solid var(--panel-edge);
+}
+.card-image svg { width: 100%; height: 100%; display: block; }
+.card-credit { font-size: 0.75rem; color: var(--text-dim); margin: 0; }
+.card-story { margin: 0; font-size: 0.95rem; }
+.card-facts { margin: 0; padding-left: 1.2rem; font-size: 0.88rem; color: var(--text-dim); }
+.card-facts li { margin-bottom: 0.3rem; }
+.last-signal {
+  font-size: 0.85rem;
+  color: var(--accent-2);
+  border-left: 3px solid var(--accent-2);
+  padding-left: 0.7rem;
+  margin: 0;
+}
+.card-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: auto; }
+.btn {
+  background: var(--bg-alt);
+  color: var(--text);
+  border: 1px solid var(--panel-edge);
+  border-radius: 8px;
+  padding: 0.4rem 0.9rem;
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--accent); color: #04121f; border-color: var(--accent); font-weight: 700; }
+.btn[aria-pressed="true"] { background: var(--accent-2); border-color: var(--accent-2); color: #04121f; }
+.speech-status { font-size: 0.8rem; color: var(--text-dim); width: 100%; }
+.nasa-img-wrap { position: relative; }
+.nasa-img-wrap img { width: 100%; height: 170px; object-fit: cover; border-radius: 10px; display: block; background: var(--bg-alt); }
+.nasa-img-link { font-size: 0.75rem; color: var(--accent); display: block; margin-top: 0.25rem; }
+
+/* ---------- Timeline ---------- */
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  max-width: 720px;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: var(--panel-edge);
+}
+.timeline li {
+  position: relative;
+  padding: 0 0 1.6rem 2rem;
+}
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 3px solid var(--accent);
+}
+.timeline li.mars::before { border-color: #fb923c; }
+.timeline li.hidden { display: none; }
+.timeline .tl-year { font-weight: 700; color: var(--accent); margin-right: 0.5rem; }
+.timeline li.mars .tl-year { color: #fdba74; }
+.timeline .tl-name { font-weight: 600; }
+.timeline .tl-body { color: var(--text-dim); font-size: 0.85rem; margin-left: 0.4rem; }
+
+/* ---------- Why it matters ---------- */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+.why-card {
+  background: var(--panel);
+  border: 1px solid var(--panel-edge);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+}
+.why-card h3 { margin: 0 0 0.5rem; font-size: 1.05rem; color: var(--accent-2); }
+.why-card p { margin: 0; font-size: 0.92rem; color: var(--text-dim); }
+
+/* ---------- Epitaph / memorial ---------- */
+.epitaph-form {
+  display: grid;
+  gap: 0.6rem;
+  max-width: 560px;
+  margin-bottom: 1.5rem;
+}
+.epitaph-form label { font-size: 0.85rem; color: var(--text-dim); }
+.epitaph-form select, .epitaph-form input {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--panel-edge);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  font: inherit;
+  width: 100%;
+}
+.epitaph-form button {
+  background: var(--accent);
+  color: #04121f;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.form-error { color: var(--danger); font-size: 0.9rem; }
+.memorial-wall {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.7rem;
+  max-width: 720px;
+}
+.memorial-wall li {
+  background: var(--bg-alt);
+  border: 1px solid var(--panel-edge);
+  border-left: 4px solid var(--gold);
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  font-style: italic;
+}
+.memorial-wall .wall-artifact { font-style: normal; font-weight: 700; color: var(--accent); font-size: 0.85rem; display: block; }
+.memorial-wall .wall-remove {
+  float: right;
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+.memorial-wall .wall-remove:hover { color: var(--danger); }
+.memorial-note { font-size: 0.8rem; color: var(--text-dim); }
+
+/* ---------- Quiz ---------- */
+#quiz-container { max-width: 640px; }
+.quiz-card {
+  background: var(--panel);
+  border: 1px solid var(--panel-edge);
+  border-radius: var(--radius);
+  padding: 1.4rem;
+}
+.quiz-progress { font-size: 0.85rem; color: var(--text-dim); margin: 0 0 0.8rem; }
+.quiz-question { font-size: 1.1rem; font-weight: 600; margin: 0 0 1rem; }
+.quiz-options { display: grid; gap: 0.5rem; }
+.quiz-option {
+  text-align: left;
+  background: var(--bg-alt);
+  border: 1px solid var(--panel-edge);
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+  font: inherit;
+  color: var(--text);
+  cursor: pointer;
+}
+.quiz-option:hover:not(:disabled) { border-color: var(--accent); }
+.quiz-option.correct { border-color: #4ade80; background: rgba(74, 222, 128, 0.08); }
+.quiz-option.wrong { border-color: var(--danger); background: rgba(248, 113, 113, 0.08); }
+.quiz-option:disabled { cursor: default; opacity: 0.85; }
+.quiz-explanation { margin-top: 1rem; padding: 0.9rem; background: var(--bg-alt); border-radius: 8px; font-size: 0.92rem; }
+.quiz-score { font-size: 1.1rem; margin: 0 0 1rem; }
+.quiz-review { list-style: none; padding: 0; margin: 0 0 1rem; font-size: 0.9rem; }
+.quiz-review li { padding: 0.4rem 0; border-bottom: 1px solid var(--panel-edge); }
+
+/* ---------- Footer ---------- */
+.section-footer { border-top: 1px solid var(--panel-edge); }
+.credits-list { padding-left: 1.2rem; color: var(--text-dim); }
+.credits-list li { margin-bottom: 0.5rem; }
+.disclaimer, .ai-note, .credits-fine { font-size: 0.85rem; color: var(--text-dim); }
+.ai-note { color: var(--gold); }
+.site-footer {
+  text-align: center;
+  padding: 2rem 1rem 3rem;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--panel-edge);
+}
+.footer-note { font-size: 0.8rem; }
+
+.noscript-note { background: var(--panel); padding: 1rem; border-radius: 8px; }
+
+/* ---------- Responsive ---------- */
+@media (min-width: 720px) {
+  .epitaph-form { grid-template-columns: 1fr 2fr auto; align-items: end; }
+  .epitaph-form label { grid-column: 1 / -1; margin-bottom: -0.4rem; }
+}

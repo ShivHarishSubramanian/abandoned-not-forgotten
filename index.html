@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<!--
+  Abandoned but not Forgotten — NASA Space Apps Challenge 2026 project.
+  AI disclosure: Code and story text drafted with AI assistance
+  (Windsurf/Claude) and reviewed by the team. Unofficial entry; not
+  affiliated with or endorsed by NASA.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="generator-note" content="Code and story text drafted with AI assistance (Windsurf/Claude) and reviewed by the team. Unofficial, created for the NASA Space Apps Challenge. Not affiliated with or endorsed by NASA." />
+  <meta name="description" content="An immersive scrollytelling experience giving a voice to the landers, rovers, and instruments NASA left behind on the Moon and Mars." />
+  <title>Abandoned but not Forgotten — Stories from the Moon and Mars</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Starfield background canvas -->
+  <canvas id="starfield" aria-hidden="true"></canvas>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============ HERO ============ -->
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <p class="hero-kicker">NASA Space Apps Challenge 2026</p>
+      <h1>Abandoned but <span class="accent">not Forgotten</span></h1>
+      <p class="hero-tagline">Stories from the equipment humanity left behind on the Moon and Mars.</p>
+      <p class="hero-sub">They finished their mission. They never came home.</p>
+      <a class="scroll-cue" href="#map" aria-label="Scroll to the map section">
+        <span>Scroll to begin</span>
+        <span class="cue-arrow" aria-hidden="true">&#8595;</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============ INTERACTIVE MAP ============ -->
+    <section class="section" id="map" aria-labelledby="map-heading">
+      <div class="section-inner">
+        <h2 id="map-heading">Where they rest</h2>
+        <p class="section-lede">Every pin is a machine that still sits on another world. Pin positions are <strong>approximate</strong>, drawn from public mission data — not survey-grade.</p>
+
+        <div class="map-toggle" role="tablist" aria-label="Choose a celestial body">
+          <button class="map-btn active" id="btn-moon" role="tab" aria-selected="true" aria-controls="map-canvas">Moon</button>
+          <button class="map-btn" id="btn-mars" role="tab" aria-selected="false" aria-controls="map-canvas">Mars</button>
+        </div>
+
+        <div class="map-wrap">
+          <canvas id="map-canvas" role="img" aria-label="Interactive map of approximate landing sites on the selected body"></canvas>
+          <ul class="map-legend" id="map-legend" aria-label="Map legend"></ul>
+        </div>
+        <p class="map-note">Click a pin to read that artifact's story below. Positions are approximate.</p>
+      </div>
+    </section>
+
+    <!-- ============ ARTIFACT STORIES ============ -->
+    <section class="section" id="stories" aria-labelledby="stories-heading">
+      <div class="section-inner">
+        <h2 id="stories-heading">Their stories</h2>
+        <p class="section-lede">Each artifact speaks in the first person. Facts are drawn from public NASA mission records; stories are original retellings.</p>
+
+        <div class="filter-bar" role="group" aria-label="Filter stories by body">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="moon">Moon</button>
+          <button class="filter-btn" data-filter="mars">Mars</button>
+        </div>
+
+        <div class="artifact-grid" id="artifact-grid"><!-- cards injected by app.js --></div>
+        <noscript><p class="noscript-note">This experience needs JavaScript to load the stories. The data lives in <code>data/artifacts.json</code>.</p></noscript>
+      </div>
+    </section>
+
+    <!-- ============ THEN VS NOW TIMELINE ============ -->
+    <section class="section" id="timeline" aria-labelledby="timeline-heading">
+      <div class="section-inner">
+        <h2 id="timeline-heading">Then vs. Now</h2>
+        <p class="section-lede">From the first robotic scouts to the first aircraft on Mars — every mission that left something behind.</p>
+        <div class="filter-bar" role="group" aria-label="Filter timeline by body">
+          <button class="filter-btn active" data-timeline-filter="all">All</button>
+          <button class="filter-btn" data-timeline-filter="moon">Moon</button>
+          <button class="filter-btn" data-timeline-filter="mars">Mars</button>
+        </div>
+        <ol class="timeline" id="timeline-list"><!-- items injected by app.js --></ol>
+      </div>
+    </section>
+
+    <!-- ============ WHY IT MATTERS ============ -->
+    <section class="section" id="why" aria-labelledby="why-heading">
+      <div class="section-inner">
+        <h2 id="why-heading">Why it matters</h2>
+        <div class="why-grid">
+          <article class="why-card">
+            <h3>Space heritage</h3>
+            <p>The Apollo landing sites and early Mars landers are humanity's first off-world cultural heritage. They mark where we crossed a threshold.</p>
+          </article>
+          <article class="why-card">
+            <h3>Preservation</h3>
+            <p>These sites may deserve protection. Some nations have proposed treating Apollo sites as preserved heritage zones, like museums under open sky.</p>
+          </article>
+          <article class="why-card">
+            <h3>Space debris</h3>
+            <p>Each abandoned machine raises a real question: what do we leave behind, and who decides? Mars and the Moon have no cleanup crews — yet.</p>
+          </article>
+          <article class="why-card">
+            <h3>Planetary protection</h3>
+            <p>Abandoned equipment carries Earth microbes. Understanding contamination helps us protect possible Martian environments — and search for life safely.</p>
+          </article>
+          <article class="why-card">
+            <h3>Responsible exploration</h3>
+            <p>The artifacts on this page are reminders that exploration leaves footprints. Future missions — crewed and robotic — should leave less, not more.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MEMORIAL WALL ============ -->
+    <section class="section" id="epitaph" aria-labelledby="epitaph-heading">
+      <div class="section-inner">
+        <h2 id="epitaph-heading">Write their epitaph</h2>
+        <p class="section-lede">Leave a one-line tribute to any artifact. It will appear on the memorial wall — held in memory only, never stored, never shared.</p>
+        <form id="epitaph-form" class="epitaph-form">
+          <label for="epitaph-artifact">Artifact</label>
+          <select id="epitaph-artifact"><!-- options injected by app.js --></select>
+          <label for="epitaph-text">Your tribute (max 140 characters)</label>
+          <input type="text" id="epitaph-text" maxlength="140" required placeholder="e.g. Still listening to the Moon." />
+          <button type="submit">Place on the wall</button>
+        </form>
+        <p id="epitaph-error" class="form-error" role="alert" hidden></p>
+        <ul id="memorial-wall" class="memorial-wall" aria-label="Memorial wall of tributes"><!-- tributes injected by app.js --></ul>
+        <p class="memorial-note">The wall is held in your browser's memory only. Refreshing clears it. No data is stored or sent anywhere.</p>
+      </div>
+    </section>
+
+    <!-- ============ QUIZ ============ -->
+    <section class="section" id="quiz" aria-labelledby="quiz-heading">
+      <div class="section-inner">
+        <h2 id="quiz-heading">How well do you know them?</h2>
+        <p class="section-lede">Six questions drawn from the artifacts above. No score is saved anywhere.</p>
+        <div id="quiz-container"><!-- quiz injected by app.js --></div>
+      </div>
+    </section>
+
+    <!-- ============ CREDITS ============ -->
+    <section class="section section-footer" id="credits" aria-labelledby="credits-heading">
+      <div class="section-inner">
+        <h2 id="credits-heading">Credits &amp; data sources</h2>
+        <ul class="credits-list">
+          <li><strong>NASA Image and Video Library API</strong> — public images and metadata attempted at runtime for each artifact, with graceful SVG fallback.</li>
+          <li><strong>NASA NSSDC Master Catalog</strong> — mission and spacecraft records used to verify dates and locations.</li>
+          <li><strong>NASA LRO / LROC</strong> — Apollo landing site imagery referenced for location context.</li>
+          <li><strong>NASA mission pages</strong> — Apollo, Viking, Mars Pathfinder, MER, Phoenix, InSight, and Mars 2020 project histories.</li>
+        </ul>
+        <p class="disclaimer">Unofficial, created for the NASA Space Apps Challenge. Not affiliated with or endorsed by NASA.</p>
+        <p class="ai-note">Code and story text drafted with AI assistance (Windsurf/Claude) and reviewed by the team.</p>
+        <p class="credits-fine">All illustrations are original SVG. No NASA logos, insignia, or mission patches are used.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Abandoned but not Forgotten — NASA Space Apps Challenge 2026</p>
+    <p class="footer-note">Unofficial entry. Not affiliated with or endorsed by NASA.</p>
+  </footer>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>

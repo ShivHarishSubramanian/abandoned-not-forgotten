@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!-- Demo deck for NASA Space Apps Challenge 2026.
+     Open in a browser, then Print → Save as PDF (7 slides).
+     AI disclosure: drafted with AI assistance (Windsurf/Claude), reviewed by the team. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Demo — Abandoned but not Forgotten</title>
+<style>
+  :root { --bg:#05070f; --panel:#0d1428; --text:#e8ecf8; --dim:#a8b3d0; --accent:#7dd3fc; --gold:#fbbf24; --edge:#1c2a4a; }
+  * { box-sizing:border-box; margin:0; }
+  body { font-family:"Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--text); }
+  .slide { width:100%; min-height:100vh; padding:6vh 8vw; display:flex; flex-direction:column; justify-content:center; page-break-after:always; border-bottom:1px solid var(--edge); }
+  .slide:last-child { border-bottom:none; }
+  .kicker { color:var(--gold); letter-spacing:.3em; text-transform:uppercase; font-size:.8rem; margin-bottom:1rem; }
+  h1 { font-size:clamp(2.4rem,6vw,4.5rem); line-height:1.05; }
+  h2 { font-size:clamp(1.8rem,4vw,3rem); margin-bottom:1.5rem; }
+  h2 .n { color:var(--accent); margin-right:.6rem; }
+  .tag { color:var(--dim); font-size:1.15rem; max-width:60ch; margin-top:1rem; font-style:italic; }
+  ul { padding-left:1.4rem; max-width:64ch; }
+  li { margin-bottom:.7rem; font-size:1.05rem; color:var(--text); }
+  li strong { color:var(--accent); }
+  .cols { display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:start; }
+  .box { background:var(--panel); border:1px solid var(--edge); border-radius:14px; padding:1.2rem 1.4rem; }
+  .box h3 { color:var(--accent); font-size:1rem; margin-bottom:.5rem; }
+  .box p, .box li { font-size:.95rem; color:var(--dim); }
+  .visual { color:var(--dim); font-size:.9rem; border-left:3px solid var(--gold); padding-left:1rem; margin-top:2rem; max-width:70ch; }
+  .visual strong { color:var(--gold); }
+  table { border-collapse:collapse; width:100%; max-width:80ch; }
+  td { padding:.45rem .8rem; border-bottom:1px solid var(--edge); font-size:.95rem; vertical-align:top; }
+  td:first-child { color:var(--accent); font-weight:700; white-space:nowrap; width:5rem; }
+  .team { margin-top:3rem; color:var(--dim); font-size:.9rem; }
+  @media print {
+    body { background:#fff; color:#111; }
+    .slide { min-height:96vh; border:none; page-break-after:always; }
+    .box, li, h1, h2 { color:#111; }
+    .kicker, h2 .n, li strong, td:first-child { color:#0a4d8c; }
+    .tag, li, .box p, .box li, .team, td { color:#333; }
+    .visual { border-color:#b8860b; color:#555; }
+    .visual strong { color:#7a5b00; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1 — Title -->
+<section class="slide">
+  <p class="kicker">NASA Space Apps Challenge 2026</p>
+  <h1>Abandoned but <span style="color:var(--accent)">not Forgotten</span></h1>
+  <p class="tag">Stories from the equipment humanity left behind on the Moon and Mars.</p>
+  <p class="tag" style="color:var(--gold)">"They finished their mission. They never came home."</p>
+  <p class="team">Team: [TEAM NAME] &nbsp;·&nbsp; Members: [MEMBERS] &nbsp;·&nbsp; [CHALLENGE TRACK]</p>
+</section>
+
+<!-- SLIDE 2 — Problem -->
+<section class="slide">
+  <h2><span class="n">02</span>The problem: a museum nobody visits</h2>
+  <ul>
+    <li>Every Moon and Mars mission left machinery behind — <strong>landers, rovers, instruments, even golf balls</strong>.</li>
+    <li>Most people never learn their names or what they accomplished.</li>
+    <li>Their stories are scattered across decades of mission reports and archives.</li>
+    <li>As spaceflight grows crowded, questions of <strong>heritage, debris, and responsibility</strong> are arriving fast.</li>
+  </ul>
+  <p class="visual"><strong>Visual:</strong> split frame — Apollo descent stage photo (NASA, credited) beside a Mars rover; question mark between "mission" and "memory."</p>
+</section>
+
+<!-- SLIDE 3 — Solution / UX -->
+<section class="slide">
+  <h2><span class="n">03</span>The solution: a museum that fits in a browser tab</h2>
+  <div class="cols">
+    <div class="box"><h3>Explore</h3><p>Interactive Moon/Mars map with clickable landing-site pins (positions labeled approximate).</p></div>
+    <div class="box"><h3>Listen</h3><p>16 first-person artifact stories with real mission facts — press play and the browser reads them aloud.</p></div>
+    <div class="box"><h3>Remember</h3><p>Leave a one-line epitaph on a memorial wall — held in memory only, nothing stored or shared.</p></div>
+    <div class="box"><h3>Test</h3><p>A quiz generated live from the dataset, plus a Then-vs-Now timeline from 1967 to 2024.</p></div>
+  </div>
+  <p class="visual"><strong>Visual:</strong> short screen recording — scroll hero → toggle Moon/Mars → click pin → story card → Listen → memorial tribute → quiz.</p>
+</section>
+
+<!-- SLIDE 4 — NASA data -->
+<section class="slide">
+  <h2><span class="n">04</span>How NASA data makes it possible</h2>
+  <ul>
+    <li><strong>NASA Image and Video Library API</strong> — live imagery + credit for every artifact at runtime, with graceful fallback.</li>
+    <li><strong>NASA NSSDC Master Catalog</strong> — verified mission dates, spacecraft records, locations.</li>
+    <li><strong>LRO / LROC + mission pages</strong> — landing-site context and mission histories.</li>
+    <li>Every artifact carries a <strong>source note</strong> stating exactly what to verify — facts stay honest.</li>
+  </ul>
+  <p class="visual"><strong>Visual:</strong> diagram — artifacts.json → app.js → NASA API → credited image on card; side arrow to NSSDC.</p>
+</section>
+
+<!-- SLIDE 5 — Key features -->
+<section class="slide">
+  <h2><span class="n">05</span>Key features</h2>
+  <ul>
+    <li><strong>Zero build:</strong> plain HTML, CSS, vanilla JS — no frameworks, no backend, no API keys.</li>
+    <li><strong>Offline-capable:</strong> embedded fallback data and original SVG illustrations.</li>
+    <li><strong>Accessible:</strong> semantic HTML, keyboard navigation, reduced-motion support.</li>
+    <li><strong>Privacy-first:</strong> no accounts, no tracking, no cookies — the memorial wall is memory-only.</li>
+    <li><strong>Lightweight:</strong> small footprint, lazy-loaded images, Lighthouse-friendly.</li>
+  </ul>
+  <p class="visual"><strong>Visual:</strong> checklist graphic; optional Lighthouse score screenshot.</p>
+</section>
+
+<!-- SLIDE 6 — Impact -->
+<section class="slide">
+  <h2><span class="n">06</span>Impact</h2>
+  <ul>
+    <li>Turns datasheets into <strong>emotional, memorable stories</strong> for students and the public.</li>
+    <li>Builds awareness of <strong>off-world heritage sites</strong> and preservation debates.</li>
+    <li>Models <strong>responsible exploration</strong>: what we leave behind matters.</li>
+    <li>Runs anywhere — classrooms, museums, hackathons — with zero infrastructure.</li>
+  </ul>
+  <p class="visual"><strong>Visual:</strong> quote cards from artifact stories; globe with Moon and Mars markers.</p>
+</section>
+
+<!-- SLIDE 7 — Future vision -->
+<section class="slide">
+  <h2><span class="n">07</span>Future vision</h2>
+  <ul>
+    <li>True selenographic / areographic pin coordinates from ephemeris data.</li>
+    <li>Curated NASA asset IDs per artifact for precise imagery.</li>
+    <li>Teacher toolkit: lesson plans built around each artifact story.</li>
+    <li>Community-verified facts with citations back to NASA sources.</li>
+  </ul>
+  <p class="tag" style="margin-top:2rem">You are here — this is version one.</p>
+  <p class="visual"><strong>Visual:</strong> roadmap timeline ending at "you are here" marker.</p>
+</section>
+
+</body>
+</html>
